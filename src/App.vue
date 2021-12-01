@@ -1,14 +1,27 @@
 <template>
   <div id="app">
-    <el-row type="flex" justify="center" align="middle">
+    <el-row type="flex" justify="center">
       <el-col :span="9">
         <div class="left">
           <div class="light"></div>
+          <div class="icon">
+            <div class="meteor"></div>
+            <div class="moon"></div>
+            <div class="star star1"></div>
+            <div class="star star2"></div>
+            <div class="star star3"></div>
+            <div class="building-group">
+              <div class="building" v-for="building in 2">
+                <div class="room" v-for="room in 12"></div>
+              </div>
+            </div>
+            
+          </div>
           <div class="welcome">
             <div class="wel-title">
               欢迎回来!
             </div>
-            <div class="wel-text">黑夜给了我黑色的眼睛,<br/>我却用它来寻找光明!</div>
+            <div class="wel-text">文字内容</div>
           </div>
         </div>
       </el-col>
@@ -37,11 +50,11 @@
               </el-form-item>
               <div class="lo-btn">
                 <el-button @click="load('userInfo')" type="goon">登录</el-button>
-                <!-- <el-button @click="logon('userInfo')">注册</el-button> -->
+                <el-button @click="logon('userInfo')" type="text">注册</el-button>
               </div>
             </el-form>
           </div>
-    </div>
+        </div>
       </el-col>
     </el-row>
     
@@ -108,17 +121,27 @@ export default {
 <style scope>
 @import '~@/assets/css/base.css';
 .el-row {
-  height: 100vh;
+  height: 83vh;
+  margin-top: 8vh;
+}
+.el-row .el-col {
+  height: 83vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
 }
 .left {
   width: 100%;
-  height: 83vh;
+  height: 100%;
   background-color: var(--color-text);
   position: relative;
+  overflow: hidden;
 }
 .welcome {
   margin-top: 30%;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 .light {
   position: absolute;
@@ -135,31 +158,141 @@ export default {
   margin-top: 30px;
   line-height: 40px;
 }
+
+@keyframes breath {
+  0%,100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0);
+  }
+}
+@keyframes falling {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
+.meteor {
+  width: 2px;
+  height: 50px;
+  background: linear-gradient(-45deg, #ffffff, rgba(0, 0, 255, 0));
+  border-radius: 999em;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  z-index: 3;
+  transform: rotate(-45deg);
+  animation: falling 6s infinite ease-in;
+}
+.moon {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-color: transparent;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 30px 30px 0 0 cyan;
+  top: 0px;
+  left: 100px;
+}
+.star,.star::before,.star::after {
+  z-index: 2;
+  width: 5px;
+  height: 30px;
+  border-radius: 50% 50%;
+  background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  animation: breath 7s infinite;
+}
+.star1 {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+.star2 {
+  position: absolute;
+  top: 150px;
+  left: 75px;
+}
+.star3 {
+  position: absolute;
+  top: 100px;
+  left: 500px;
+}
+.star::before,.star::after {
+  content: '';
+  position: absolute;
+}
+.star::before {
+  transform: rotate(120deg);
+}
+.star::after {
+  transform: rotate(240deg);
+}
+.building-group {
+  width: 100%;
+  height: 300px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+}
+.building::before {
+  content: '';
+  width: 30px;
+  height: 30px;
+  background-color: #836BB5;
+  position: absolute;
+  top: -30px;
+}
+.building {
+  width: 100px;
+  height: 300px;
+  background-color: #836BB5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: wrap;
+}
+@keyframes roomLight {
+  0%,100% {
+    background-color: rgba(245, 242, 75, 0.877);
+    box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
+  }
+  50% {
+    background-color: #B4A4CF;
+    box-shadow: 0 0 10px #b4a4cfcb;
+  }
+}
+.room {
+  width: 40px;
+  height: 20px;
+  background-color: rgba(245, 242, 75, 0.877);
+  box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
+  animation: roomLight 10s infinite;
+}
+
 .right {
   width: 100%;
-  height: 83vh;
   background-color: #fff;
-  margin-left: 50%;
-  position: relative;
 }
 .rt-inner {
   width: 60%;
   height: 500px;
   background-color: #fff;
-  filter: 0.5;
   margin: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 .title {
   font-size: 40px;
   color: var(--color-text);
   text-align: center;
-  overflow: hidden;
-  margin-top: 70px;
 }
 .el-form {
   width: 90%;
@@ -174,12 +307,6 @@ export default {
   border-radius: 0px;
   background-color: #fff;
 }
-.lo-btn .el-button--goon{
-  background: var(--color-text);
-  border-color: var(--color-text);
-  color: #fff;
-}
-
 .lo-btn
 .el-button--goon,
 .el-button--goon:focus,
@@ -195,11 +322,21 @@ export default {
   transform: translate(-30%,50%);
   border-radius: 999em;
 }
+.lo-btn
 .el-button--goon.is-disabled:hover,
 .el-button--goon:hover,
 .el-button--goon.is-disabled {
   background: #9c9df1;
   border-color: #9c9df1;
   color: #fff;
+}
+.lo-btn {
+  position: relative;
+}
+.lo-btn .el-button--text {
+  color: var(--color-text);
+  position: absolute;
+  left: 400px;
+  top: -20px;
 }
 </style>
