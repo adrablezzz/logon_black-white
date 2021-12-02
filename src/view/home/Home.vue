@@ -1,11 +1,11 @@
 <template>
-  <div id="home">
+  <div id="home" class="dark-theme">
     <el-row type="flex" justify="center">
         <el-col :span="9">
           <div class="left">
             <div class="light"></div>
             <div class="icon">
-              <meteors/>
+              <meteors class="meteors"/>
               <div class="moon"></div>
               <div class="star star1"></div>
               <div class="star star2"></div>
@@ -39,7 +39,7 @@
                     { required: true, message: '请输入用户名', trigger: 'blur' }
                   ]"
                 >
-                  <el-input v-model="userInfo.username" clearable></el-input>
+                  <el-input class="input1" v-model="userInfo.username" clearable></el-input>
                 </el-form-item>
                 <el-form-item
                   prop="password"
@@ -48,7 +48,7 @@
                     { required: true, message: '请输入密码', trigger: 'blur' }
                   ]"
                 >
-                  <el-input v-model="userInfo.password" clearable show-password></el-input>
+                  <el-input class="input1" v-model="userInfo.password" clearable show-password></el-input>
                 </el-form-item>
                 <div class="lo-btn">
                   <el-button @click="load('userInfo')" type="goon">登录</el-button>
@@ -133,10 +133,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 @import url('~@/assets/css/font.css');
-#app {
+
+#home {
   min-width: 1500px;
+  // background-color: var(--color-background);
+  height: 100vh;
+  overflow: hidden;
 }
 .el-row {
   height: 83vh;
@@ -151,7 +155,6 @@ export default {
 .left {
   width: 100%;
   height: 100%;
-  background-color: var(--color-text);
   position: relative;
   overflow: hidden;
 }
@@ -185,51 +188,7 @@ export default {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0);
   }
 }
-.moon {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  background-color: transparent;
-  z-index: 1;
-  border-radius: 50%;
-  box-shadow: 30px 30px 0 0 cyan;
-  top: 0px;
-  left: 100px;
-}
-.star,.star::before,.star::after {
-  z-index: 2;
-  width: 5px;
-  height: 30px;
-  border-radius: 50% 50%;
-  background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 1);
-  animation: breath 7s infinite;
-}
-.star1 {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-}
-.star2 {
-  position: absolute;
-  top: 150px;
-  left: 75px;
-}
-.star3 {
-  position: absolute;
-  top: 100px;
-  left: 500px;
-}
-.star::before,.star::after {
-  content: '';
-  position: absolute;
-}
-.star::before {
-  transform: rotate(120deg);
-}
-.star::after {
-  transform: rotate(240deg);
-}
+
 .building-group {
   width: 100%;
   height: 300px;
@@ -244,14 +203,12 @@ export default {
   content: '';
   width: 30px;
   height: 30px;
-  background-color: #836BB5;
   position: absolute;
   top: -30px;
 }
 .building {
   width: 100px;
   height: 300px;
-  background-color: #836BB5;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -270,9 +227,8 @@ export default {
 .room {
   width: 40px;
   height: 20px;
-  background-color: rgba(245, 242, 75, 0.877);
   box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
-  animation: roomLight 10s infinite;
+  // animation: roomLight 10s infinite;
 }
 
 .right {
@@ -296,22 +252,20 @@ export default {
 }
 .title {
   font-size: 40px;
-  color: var(--color-text);
+  // color: var(--color-text);
   text-align: center;
 }
 .el-form {
   width: 90%;
   margin-top: 120px;
+  //这里/deep/生效,>>>不能生效
+  .el-input /deep/ .el-input__inner {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+  }
 }
-.el-form-item .el-form-item__label {
-  color: var(--color-text);
-}
-.el-input .el-input__inner {
-  border: none;
-  border-bottom: 1px var(--color-text) solid;
-  border-radius: 0px;
-  background-color: #fff;
-}
+
 .lo-btn
 .el-button--goon,
 .el-button--goon:focus,
@@ -339,9 +293,162 @@ export default {
   position: relative;
 }
 .lo-btn .el-button--text {
-  color: var(--color-text);
+  // color: var(--color-text);
   position: absolute;
   right: 0px;
   top: -20px;
+}
+
+//以下是三种主题
+.dark-theme {
+  color: var(--color-text);
+  background-color: var(--color-background);
+  .lo-btn .el-button--text {
+    color: var(--color-text);
+  }
+  .el-form {
+    .el-form-item /deep/ .el-form-item__label{
+      color: var(--color-text);
+    }
+    .el-input /deep/ .el-input__inner {
+      border-bottom-color: var(--color-text);
+    }
+  }
+  .left {
+    background-color: var(--color-text);
+  }
+  .icon {
+    .building-group {
+      .building {
+        background-color: #836BB5;
+        &::before {
+          background-color: #836BB5;
+        }
+        .room {
+          background-color: rgba(245, 242, 75, 0.877);
+        }
+      }
+    }
+    .moon {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-color: transparent;
+      z-index: 1;
+      border-radius: 50%;
+      box-shadow: 30px 30px 0 0 cyan;
+      top: 0px;
+      left: 100px;
+    }
+    .meteors {
+      display: block;
+    }
+    .star,.star::before,.star::after {
+    z-index: 2;
+    width: 5px;
+    height: 30px;
+    border-radius: 50% 50%;
+    background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    animation: breath 7s infinite;
+    }
+    .star1 {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+    }
+    .star2 {
+      position: absolute;
+      top: 150px;
+      left: 75px;
+    }
+    .star3 {
+      position: absolute;
+      top: 100px;
+      left: 500px;
+    }
+    .star::before,.star::after {
+      content: '';
+      position: absolute;
+    }
+    .star::before {
+      transform: rotate(120deg);
+    }
+    .star::after {
+      transform: rotate(240deg);
+    }
+  }
+  
+}
+.light-theme {
+  background-color: #BCDCF1;
+  .left {
+    background-color: #EDF6FD;
+  }
+  .icon {
+    .building-group {
+      .building {
+        background-color: #836BB5;
+        &::before {
+          background-color: #836BB5;
+        }
+        .room {
+          background-color: rgba(245, 242, 75, 0.877);
+        }
+      }
+    }
+    .moon {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-color: transparent;
+      z-index: 1;
+      border-radius: 50%;
+      box-shadow: 30px 30px 0 0 cyan;
+      top: 0px;
+      left: 100px;
+    }
+    .meteors {
+      display: block;
+    }
+    .star,.star::before,.star::after {
+    z-index: 2;
+    width: 5px;
+    height: 30px;
+    border-radius: 50% 50%;
+    background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    animation: breath 7s infinite;
+    }
+    .star1 {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+    }
+    .star2 {
+      position: absolute;
+      top: 150px;
+      left: 75px;
+    }
+    .star3 {
+      position: absolute;
+      top: 100px;
+      left: 500px;
+    }
+    .star::before,.star::after {
+      content: '';
+      position: absolute;
+    }
+    .star::before {
+      transform: rotate(120deg);
+    }
+    .star::after {
+      transform: rotate(240deg);
+    }
+  }
+  
+}
+.grey-theme {
+  
 }
 </style>

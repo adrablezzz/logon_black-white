@@ -68,12 +68,12 @@ export default {
   animation-delay: var(--random-time);
 }
 .meteor2 {
-  animation: falling2 6s infinite ease-in;
+  animation: falling2 7s infinite ease-in;
   animation-delay: var(--random-time);
 
 }
 .meteor3 {
-  animation: falling3 6s infinite ease-in;
+  animation: falling3 8s infinite ease-in;
   animation-delay: var(--random-time);
 
 }
