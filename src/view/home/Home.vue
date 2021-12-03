@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="dark-theme">
+  <div id="home" :class="theme[currentIndex]">
     <el-row type="flex" justify="center">
         <el-col :span="9">
           <div class="left">
@@ -7,6 +7,9 @@
             <div class="icon">
               <meteors class="meteors"/>
               <div class="moon"></div>
+              <div class="sun"></div>
+              <div class="cloud"></div>
+              <div class="rain"></div>
               <div class="star star1"></div>
               <div class="star star2"></div>
               <div class="star star3"></div>
@@ -27,7 +30,7 @@
         <el-col :span="10">
           <div class="right">
             <div class="theme-switch">
-              <div class="iconfont" :class="whichTheme[currentIndex]" @click="themeSwitch"></div>
+              <div class="iconfont" :class="iconTheme[currentIndex]" @click="themeSwitch"></div>
             </div>
             <div class="rt-inner" >
               <div class="title">欢迎登录</div>
@@ -75,12 +78,9 @@ export default {
         username: '',
         password: ''
       },
-      currentIndex: 0,
-      whichTheme: [
-        'icon-yejianmoshishenyemoshiyueliang',
-        'icon-taiyang',
-        'icon-duoyun'
-      ]
+      currentIndex: 2,
+      iconTheme: ['icon-yejianmoshishenyemoshiyueliang', 'icon-taiyang', 'icon-duoyun'],
+      theme: ['dark-theme', 'light-theme', 'grey-theme']
     }
   },
   methods: {
@@ -214,21 +214,9 @@ export default {
   align-items: center;
   flex-flow: wrap;
 }
-@keyframes roomLight {
-  0%,100% {
-    background-color: rgba(245, 242, 75, 0.877);
-    box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
-  }
-  50% {
-    background-color: #B4A4CF;
-    box-shadow: 0 0 10px #b4a4cfcb;
-  }
-}
 .room {
   width: 40px;
   height: 20px;
-  box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
-  // animation: roomLight 10s infinite;
 }
 
 .right {
@@ -272,22 +260,11 @@ export default {
 .el-button--goon.is-active,
 .el-button--goon.is-disabled:active,
 .el-button--goon:active {
-  background: var(--color-text);
-  border-color: var(--color-text);
-  color: #fff;
   width: 150px;
   position: relative;
   left: 50%;
   transform: translate(-30%,50%);
   border-radius: 999em;
-}
-.lo-btn
-.el-button--goon.is-disabled:hover,
-.el-button--goon:hover,
-.el-button--goon.is-disabled {
-  background: #9c9df1;
-  border-color: #9c9df1;
-  color: #fff;
 }
 .lo-btn {
   position: relative;
@@ -305,6 +282,24 @@ export default {
   background-color: var(--color-background);
   .lo-btn .el-button--text {
     color: var(--color-text);
+  }
+  .lo-btn
+  .el-button--goon,
+  .el-button--goon:focus,
+  .el-button--goon.is-active,
+  .el-button--goon.is-disabled:active,
+  .el-button--goon:active {
+    background: var(--color-text);
+    border-color: var(--color-text);
+    color: #fff;
+  }
+  .lo-btn
+  .el-button--goon.is-disabled:hover,
+  .el-button--goon:hover,
+  .el-button--goon.is-disabled {
+    background: #9c9df1;
+    border-color: #9c9df1;
+    color: #fff;
   }
   .el-form {
     .el-form-item /deep/ .el-form-item__label{
@@ -326,6 +321,7 @@ export default {
         }
         .room {
           background-color: rgba(245, 242, 75, 0.877);
+          box-shadow: 0 0 10px rgba(245, 242, 75, 0.877);
         }
       }
     }
@@ -381,74 +377,166 @@ export default {
   
 }
 .light-theme {
-  background-color: #BCDCF1;
+  color: var(--color-light);
+  background-color: var(--color-background);
+  .lo-btn .el-button--text {
+    color: var(--color-light);
+  }
+  .lo-btn
+  .el-button--goon,
+  .el-button--goon:focus,
+  .el-button--goon.is-active,
+  .el-button--goon.is-disabled:active,
+  .el-button--goon:active {
+    background: var(--color-light);
+    border-color: var(--color-light);
+    color: #fff;
+  }
+  .lo-btn
+  .el-button--goon.is-disabled:hover,
+  .el-button--goon:hover,
+  .el-button--goon.is-disabled {
+    background: var(--color-light);
+    border-color: var(--color-light);
+    color: #fff;
+  }
+  .el-form {
+    .el-form-item /deep/ .el-form-item__label{
+      color: var(--color-light);
+    }
+    .el-input /deep/ .el-input__inner {
+      border-bottom-color: var(--color-light);
+    }
+  }
   .left {
-    background-color: #EDF6FD;
+    background-image: linear-gradient(#fff,#CAFDFE);
+    .welcome {
+      color: var(--color-light);
+    }
   }
   .icon {
     .building-group {
       .building {
-        background-color: #836BB5;
+        background-color: #556C8F;
         &::before {
-          background-color: #836BB5;
+          background-color: #556C8F;
         }
         .room {
-          background-color: rgba(245, 242, 75, 0.877);
+          background-color: #96a6ad;
+          box-shadow: 0 0 10px #96a6ad;
         }
       }
     }
-    .moon {
+    .sun {
+      width: 100px;
+      height: 100px;
+      background-image: radial-gradient(100px at center,rgb(255, 53, 53),#FCFE26);
+      box-shadow: 0 0 50px #FCFE26;
       position: absolute;
-      width: 150px;
-      height: 150px;
-      background-color: transparent;
-      z-index: 1;
       border-radius: 50%;
-      box-shadow: 30px 30px 0 0 cyan;
-      top: 0px;
+      top: 50px;
       left: 100px;
     }
     .meteors {
-      display: block;
-    }
-    .star,.star::before,.star::after {
-    z-index: 2;
-    width: 5px;
-    height: 30px;
-    border-radius: 50% 50%;
-    background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
-    animation: breath 7s infinite;
-    }
-    .star1 {
-      position: absolute;
-      top: 50px;
-      left: 50px;
-    }
-    .star2 {
-      position: absolute;
-      top: 150px;
-      left: 75px;
-    }
-    .star3 {
-      position: absolute;
-      top: 100px;
-      left: 500px;
-    }
-    .star::before,.star::after {
-      content: '';
-      position: absolute;
-    }
-    .star::before {
-      transform: rotate(120deg);
-    }
-    .star::after {
-      transform: rotate(240deg);
+      display: none;
     }
   }
-  
 }
 .grey-theme {
-  
+  color: var(--color-grey);
+  background-color: var(--color-background);
+  .lo-btn .el-button--text {
+    color: var(--color-grey);
+  }
+  .lo-btn
+  .el-button--goon,
+  .el-button--goon:focus,
+  .el-button--goon.is-active,
+  .el-button--goon.is-disabled:active,
+  .el-button--goon:active {
+    background: var(--color-grey);
+    border-color: var(--color-grey);
+    color: #fff;
+  }
+  .lo-btn
+  .el-button--goon.is-disabled:hover,
+  .el-button--goon:hover,
+  .el-button--goon.is-disabled {
+    background: var(--color-grey);
+    border-color: var(--color-grey);
+    color: #fff;
+  }
+  .el-form {
+    .el-form-item /deep/ .el-form-item__label{
+      color: var(--color-grey);
+    }
+    .el-input /deep/ .el-input__inner {
+      border-bottom-color: var(--color-grey);
+    }
+  }
+  .left {
+    background-image: linear-gradient(#86909cb6,#fff);
+    .welcome {
+      color: var(--color-grey);
+    }
+  }
+  .icon {
+    .cloud,.cloud::before {
+      $color-cloud: #86909c;
+      width: 50px; 
+      height: 50px; 
+      border-radius: 50%; 
+      background-color: $color-cloud; 
+      box-shadow: $color-cloud 65px -15px 0 -5px,
+                  $color-cloud 25px -25px, 
+                  $color-cloud 30px 10px,
+                  $color-cloud 60px 15px 0 -10px,
+                  $color-cloud 85px 5px 0 -5px;
+      position: absolute;
+      top: 100px;
+    }
+    .cloud::before {
+      content: '';
+      top: -50px;
+      left: 300px;
+    }
+    .rain {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 50px;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(#8fd4fc, #52b1f2, #0599fc);
+      border-radius: 999em;
+      transform: rotateY(45deg);
+      animation: rainDrop 3s infinite;
+    }
+    @keyframes rainDrop {
+      0% {
+        top: 0;
+      }
+      100% {
+        top: 100%;
+      }
+    }
+    .building-group {
+      .building {
+        background-color: #a9aeb8;
+        &::before {
+          background-color: #a9aeb8;
+        }
+        .room {
+          background-color: #c5c5c5;
+          box-shadow: 0 0 10px #bebebe;
+        }
+      }
+    }
+    .meteors {
+      display: none;
+    }
+  }
 }
+
+
 </style>
