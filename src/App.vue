@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="rain-fall" ref="fall" v-if="$store.state.currentIndex===2"></div>
+    <!-- <div id="rain-fall" ref="fall"></div> -->
     <keep-alive><router-view></router-view></keep-alive>
   </div>
 </template>
@@ -10,29 +10,27 @@ export default {
   name: 'APP',
   components: {
   },
-  mounted() {
-    //  this.rainFall()
-    // const {currentIndex} = this.$store.state
-    // console.log('app中的index' + currentIndex)
-    let fall = this.$refs.fall;
-    function rainFall() {
-      setTimeout(() => {
-        let el = document.createElement('div');
-        el.setAttribute('class', 'rain');
-        el.style.left = parseInt(Math.random()*750+210) + 'px';
-        fall.appendChild(el);
-        setTimeout(() => {
-          fall.removeChild(el);
-        },800)
-        rainFall();
-      },20)
-    }
-    rainFall()
-  },
+  // mounted() {
+  //   let fall = this.$refs.fall;
+  //   function rainFall() {
+  //     setTimeout(() => {
+  //       let el = document.createElement('div');
+  //       el.setAttribute('class', 'rain');
+  //       el.style.left = parseInt(Math.random()*35+10) + '%';
+  //       fall.appendChild(el);
+  //       setTimeout(() => {
+  //         fall.removeChild(el);
+  //       },800)
+  //       rainFall();
+  //     },20)
+  //   }
+  //   rainFall()
+  // },
+  
 }
 </script>
 
-<style scope>
+<style lang='scss' scope>
 @import '~@/assets/css/base.css';
 #app {
   position: relative;
@@ -41,7 +39,8 @@ export default {
   width: 100vw;
   height: 100vh;
   position: absolute;
-}
+  display: none;
+} 
 .rain {
   display: inline-block;
   position: absolute;

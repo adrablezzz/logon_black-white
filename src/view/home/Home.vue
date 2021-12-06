@@ -1,5 +1,6 @@
 <template>
   <div id="home" :class="theme[currentIndex]">
+    <div id="rain-fall" ref="fall"></div>
     <el-row type="flex" justify="center">
         <el-col :span="9">
           <div class="left" ref="left">
@@ -78,12 +79,27 @@ export default {
         username: '',
         password: ''
       },
-      currentIndex: 2,
+      currentIndex: 0,
       iconTheme: ['icon-yejianmoshishenyemoshiyueliang', 'icon-taiyang', 'icon-duoyun'],
       theme: ['dark-theme', 'light-theme', 'grey-theme']
     }
   },
-
+  mounted() {
+    let fall = this.$refs.fall;
+    function rainFall() {
+      setTimeout(() => {
+        let el = document.createElement('div');
+        el.setAttribute('class', 'rain');
+        el.style.left = parseInt(Math.random()*35+11) + '%';
+        fall.appendChild(el);
+        setTimeout(() => {
+          fall.removeChild(el);
+        },800)
+        rainFall();
+      },20)
+    }
+    rainFall()
+  },
   methods: {
     themeSwitch() {
       if(this.currentIndex>=2) {
@@ -91,8 +107,9 @@ export default {
       }else {
         this.currentIndex++
       }
+      this.$refs.fall.style.display = 'none'
       if(this.currentIndex===2) {
-        this.$store.commit('changeIndex',this.currentIndex)
+        this.$refs.fall.style.display = 'inline-block'
       }
     },
     load(userInfo) {
@@ -139,6 +156,10 @@ export default {
 
 <style lang='scss' scoped>
 @import url('~@/assets/css/font.css');
+
+#rain-fall{
+  display: none;
+}
 
 #home {
   min-width: 1500px;
