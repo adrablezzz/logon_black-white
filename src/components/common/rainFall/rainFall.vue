@@ -1,25 +1,20 @@
 <template>
-  <div id="app">
-    <div id="rain-fall" ref="fall" v-if="$store.state.currentIndex===2"></div>
-    <keep-alive><router-view></router-view></keep-alive>
-  </div>
+<div id="rain-fall" ref="fall">
+  <!-- <div class="rain"></div> -->
+</div>
 </template>
 
 <script>
 export default {
-  name: 'APP',
-  components: {
-  },
+  name: 'rainFall',
   mounted() {
     //  this.rainFall()
-    // const {currentIndex} = this.$store.state
-    // console.log('app中的index' + currentIndex)
     let fall = this.$refs.fall;
     function rainFall() {
       setTimeout(() => {
         let el = document.createElement('div');
         el.setAttribute('class', 'rain');
-        el.style.left = parseInt(Math.random()*750+210) + 'px';
+        el.style.left = parseInt(Math.random()*100) + 'px';
         fall.appendChild(el);
         setTimeout(() => {
           fall.removeChild(el);
@@ -32,20 +27,18 @@ export default {
 }
 </script>
 
-<style scope>
-@import '~@/assets/css/base.css';
-#app {
-  position: relative;
-}
+<style scoped>
 #rain-fall {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  /* background-color: #bfa; */
+  position: relative;
 }
 .rain {
   display: inline-block;
   position: absolute;
   top: 0;
+  left: 50px;
   width: 5px;
   height: 5px;
   background: radial-gradient(#8fd4fc, #52b1f2, #0599fc);
@@ -55,16 +48,16 @@ export default {
   z-index: 9999;
 }
 @keyframes rainDrop {
-  0% {top:9%;}
-  10% {top:15%;}
-  20% {top:27%;}
-  30% {top:36%;}
-  40% {top:45%;}
-  50% {top:54%;}
-  60% {top:63%;}
-  70% {top:71%;}
-  80% {top:79%;}
-  90% {top:86%;}
-  100% {top:90%;}
+  0% {top:5%;}
+  10% {top:10%;}
+  20% {top:20%;}
+  30% {top:30%;}
+  40% {top:40%;}
+  50% {top:50%;}
+  60% {top:60%;}
+  70% {top:70%;}
+  80% {top:80%;}
+  90% {top:90%;}
+  100% {top:95%;}
 }
 </style>

@@ -2,14 +2,14 @@
   <div id="home" :class="theme[currentIndex]">
     <el-row type="flex" justify="center">
         <el-col :span="9">
-          <div class="left">
+          <div class="left" ref="left">
             <div class="light"></div>
-            <div class="icon">
+            <div class="icon" ref="icon">
               <meteors class="meteors"/>
               <div class="moon"></div>
               <div class="sun"></div>
               <div class="cloud"></div>
-              <div class="rain"></div>
+              <!-- <div class="rain"></div> -->
               <div class="star star1"></div>
               <div class="star star2"></div>
               <div class="star star3"></div>
@@ -83,12 +83,16 @@ export default {
       theme: ['dark-theme', 'light-theme', 'grey-theme']
     }
   },
+
   methods: {
     themeSwitch() {
       if(this.currentIndex>=2) {
         this.currentIndex = 0
       }else {
         this.currentIndex++
+      }
+      if(this.currentIndex===2) {
+        this.$store.commit('changeIndex',this.currentIndex)
       }
     },
     load(userInfo) {
@@ -158,6 +162,7 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .welcome {
   color: #fff;
   margin-top: 30%;
@@ -274,6 +279,12 @@ export default {
   position: absolute;
   right: 0px;
   top: -20px;
+}
+.icon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 999;
 }
 
 //以下是三种主题
@@ -500,26 +511,33 @@ export default {
       top: -50px;
       left: 300px;
     }
-    .rain {
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: 50px;
-      width: 5px;
-      height: 5px;
-      background: radial-gradient(#8fd4fc, #52b1f2, #0599fc);
-      border-radius: 999em;
-      transform: rotateY(45deg);
-      animation: rainDrop 3s infinite;
-    }
-    @keyframes rainDrop {
-      0% {
-        top: 0;
-      }
-      100% {
-        top: 100%;
-      }
-    }
+    
+    // .rain {
+    //   display: inline-block;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 50px;
+    //   width: 5px;
+    //   height: 5px;
+    //   background: radial-gradient(#8fd4fc, #52b1f2, #0599fc);
+    //   border-radius: 999em;
+    //   transform: rotateY(45deg);
+    //   animation: rainDrop 0.8s infinite;
+    //   z-index: 999;
+    // }
+    // @keyframes rainDrop {
+    //   0% {top:5%;}
+    //   10% {top:10%;}
+    //   20% {top:20%;}
+    //   30% {top:30%;}
+    //   40% {top:40%;}
+    //   50% {top:50%;}
+    //   60% {top:60%;}
+    //   70% {top:70%;}
+    //   80% {top:80%;}
+    //   90% {top:90%;}
+    //   100% {top:95%;}
+    // }
     .building-group {
       .building {
         background-color: #a9aeb8;
