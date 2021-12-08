@@ -24,17 +24,27 @@
               <div class="wel-title">
                 欢迎回来!
               </div>
-              <div class="wel-text">文字内容</div>
+              <div class="wel-text">{{contentText[currentIndex]}}</div>
             </div>
           </div>
         </el-col>
         <el-col :span="10">
           <div class="right">
-            <div class="theme-switch">
+            <div class="theme-switch" title="切换主题">
               <div class="iconfont" :class="iconTheme[currentIndex]" @click="themeSwitch"></div>
             </div>
             <div class="rt-inner" >
-              <div class="title">欢迎登录</div>
+              <div class="title"
+              v-motion
+              :initial="{
+                opacity: 0,
+                y: 100,
+              }"
+              :enter="{
+                opacity: 1,
+                y: 0,
+              }"
+              >欢迎登录</div>
               <el-form :model="userInfo" ref="userInfo" label-width="100px">
                 <el-form-item
                   prop="username"
@@ -42,6 +52,15 @@
                   :rules="[
                     { required: true, message: '请输入用户名', trigger: 'blur' }
                   ]"
+                  v-motion
+                  :initial="{
+                    opacity: 0,
+                    y: 100,
+                  }"
+                  :enter="{
+                    opacity: 1,
+                    y: 0,
+                  }"
                 >
                   <el-input class="input1" v-model="userInfo.username" clearable></el-input>
                 </el-form-item>
@@ -51,12 +70,41 @@
                   :rules="[
                     { required: true, message: '请输入密码', trigger: 'blur' }
                   ]"
+                  v-motion
+                  :initial="{
+                    opacity: 0,
+                    y: 100,
+                  }"
+                  :enter="{
+                    opacity: 1,
+                    y: 0,
+                  }"
                 >
                   <el-input class="input1" v-model="userInfo.password" clearable show-password></el-input>
                 </el-form-item>
                 <div class="lo-btn">
-                  <el-button @click="load('userInfo')" type="goon">登录</el-button>
-                  <el-button @click="logon('userInfo')" type="text">注册</el-button>
+                  <el-button @click="load('userInfo')" type="goon"
+                  v-motion
+                  :initial="{
+                    opacity: 0,
+                    y: 100,
+                  }"
+                  :enter="{
+                    opacity: 1,
+                    y: 0,
+                  }"
+                  >登录</el-button>
+                  <el-button @click="logon('userInfo')" type="text"
+                  v-motion
+                  :initial="{
+                    opacity: 0,
+                    y: 100,
+                  }"
+                  :enter="{
+                    opacity: 1,
+                    y: 0,
+                  }"                  
+                  >注册</el-button>
                 </div>
               </el-form>
             </div>
@@ -81,7 +129,12 @@ export default {
       },
       currentIndex: 0,
       iconTheme: ['icon-yejianmoshishenyemoshiyueliang', 'icon-taiyang', 'icon-duoyun'],
-      theme: ['dark-theme', 'light-theme', 'grey-theme']
+      theme: ['dark-theme', 'light-theme', 'grey-theme'],
+      contentText: [
+        '我们眼中的星星像幽灵, 星星眼中的我们也像幽灵',
+        '宇宙很大, 生活更大',
+        '世界既不黑也不白, 而是一道精致的灰'
+      ]
     }
   },
   mounted() {
@@ -288,18 +341,18 @@ export default {
 .el-button--goon:active {
   width: 150px;
   position: relative;
-  left: 50%;
-  transform: translate(-30%,50%);
   border-radius: 999em;
+  left: 42%;
 }
 .lo-btn {
   position: relative;
+  top: 10px;
 }
 .lo-btn .el-button--text {
   // color: var(--color-text);
   position: absolute;
   right: 0px;
-  top: -20px;
+  top: -30px;
 }
 .icon {
   width: 100%;

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="rain-fall" ref="fall"></div> -->
     <keep-alive><router-view></router-view></keep-alive>
   </div>
 </template>
@@ -10,23 +9,6 @@ export default {
   name: 'APP',
   components: {
   },
-  // mounted() {
-  //   let fall = this.$refs.fall;
-  //   function rainFall() {
-  //     setTimeout(() => {
-  //       let el = document.createElement('div');
-  //       el.setAttribute('class', 'rain');
-  //       el.style.left = parseInt(Math.random()*35+10) + '%';
-  //       fall.appendChild(el);
-  //       setTimeout(() => {
-  //         fall.removeChild(el);
-  //       },800)
-  //       rainFall();
-  //     },20)
-  //   }
-  //   rainFall()
-  // },
-  
 }
 </script>
 

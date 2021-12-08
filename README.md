@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### require node-sass@4.14.1
+```
+cnpm install node-sass@4.14.1
+```
