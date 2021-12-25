@@ -7,7 +7,10 @@ Vue.use(ElementUI)
 import { MotionPlugin } from '@vueuse/motion'
 Vue.use(MotionPlugin)
 
-Vue.prototype.$bus = new Vue()
+// markdown样式
+import 'github-markdown-css'
+// 代码高亮
+import 'highlight.js/styles/github.css'
 
 Vue.config.productionTip = false
 

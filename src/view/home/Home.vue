@@ -124,8 +124,8 @@ export default {
   data() {
     return {
       userInfo: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123'
       },
       currentIndex: 0,
       iconTheme: ['icon-yejianmoshishenyemoshiyueliang', 'icon-taiyang', 'icon-duoyun'],
@@ -174,6 +174,7 @@ export default {
             type: 'success'
           });
           console.log(this.userInfo)
+          this.$router.replace('/new')
         }else {
           this.$notify({
             title: '失败',
@@ -242,7 +243,7 @@ export default {
   margin-top: 30%;
   text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: 9;
 }
 .light {
   position: absolute;
@@ -270,13 +271,14 @@ export default {
 
 .building-group {
   width: 100%;
-  height: 300px;
+  height: 40%;
   background-color: transparent;
   position: absolute;
   bottom: 0;
   display: flex;
-  flex-flow: wrap;
+  // flex-flow: wrap;
   justify-content: flex-start;
+  z-index: 8;
 }
 .building::before {
   content: '';
@@ -287,7 +289,7 @@ export default {
 }
 .building {
   width: 100px;
-  height: 300px;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -364,7 +366,7 @@ export default {
 //以下是三种主题
 .dark-theme {
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(--dark-background);
   .lo-btn .el-button--text {
     color: var(--color-text);
   }
@@ -412,17 +414,18 @@ export default {
     }
     .moon {
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 100px;
+      height: 100px;
       background-color: transparent;
       z-index: 1;
       border-radius: 50%;
-      box-shadow: 30px 30px 0 0 cyan;
+      box-shadow: 20px 20px 0 0 cyan;
       top: 0px;
-      left: 100px;
+      left: 10%;
     }
     .meteors {
       display: block;
+      z-index: 1;
     }
     .star,.star::before,.star::after {
     z-index: 2;
@@ -463,7 +466,7 @@ export default {
 }
 .light-theme {
   color: var(--color-light);
-  background-color: var(--color-background);
+  background-color: var(--light-background);
   .lo-btn .el-button--text {
     color: var(--color-light);
   }
@@ -529,7 +532,7 @@ export default {
 }
 .grey-theme {
   color: var(--color-grey);
-  background-color: var(--color-background);
+  background-color: var(--grey-background);
   .lo-btn .el-button--text {
     color: var(--color-grey);
   }
