@@ -3,15 +3,24 @@
   <el-row type="flex">
     <el-col :span="3">
       <div class="nav">
-        <div class="nav-item" :class="{active:currentIndex===index}" v-for="(item,index) in navs" @click="navItemClick(index)">{{item}}</div>
+        <a href="#">
+          <div class="nav-item" :class="{active:currentIndex===index}" v-for="(item,index) in navs" @click="navItemClick(index)">{{item}}</div>
+        </a>
       </div>
     </el-col>
     <el-col :span="21">
       <div class="main">
-        <ms-md class="markdown-body" v-show="currentIndex===0"></ms-md>
-        <div v-show="currentIndex===1">待更新</div>
-        <uni-md class="markdown-body" v-show="currentIndex===2"></uni-md>
-        <div v-show="currentIndex===3">待更新</div>
+        <hc-md v-motion :initial="{opacity: 0,y: 100,}" :enter="{opacity: 1,y: 0,}" 
+               class="markdown-body" v-if="currentIndex===0"></hc-md>
+        <js-md v-motion :initial="{opacity: 0,y: 100,}" :enter="{opacity: 1,y: 0,}"
+               class="markdown-body" v-if="currentIndex===1"></js-md>
+        <vue-md v-motion :initial="{opacity: 0,y: 100,}" :enter="{opacity: 1,y: 0,}" 
+               class="markdown-body" v-if="currentIndex===2"></vue-md>
+        <http-md v-motion :initial="{opacity: 0,y: 100,}" :enter="{opacity: 1,y: 0,}" 
+               class="markdown-body" v-if="currentIndex===3"></http-md>
+        <debug-md v-motion :initial="{opacity: 0,y: 100,}" :enter="{opacity: 1,y: 0,}" 
+               class="markdown-body" v-if="currentIndex===4"></debug-md>
+        
       </div>
     </el-col>
   </el-row>
@@ -19,17 +28,24 @@
 </template>
 
 <script>
-import MsMd from '@/components/md/前端面试笔记.md'
-import UniMd from '@/components/md/note_uniApp.md'
+import HcMd from '@/assets/md/note_html&css.md'
+import JsMd from '@/assets/md/note_js.md'
+import VueMd from '@/assets/md/note_vue.md'
+import HttpMd from '@/assets/md/note_http.md'
+import DebugMd from '@/assets/md/note_debug.md'
+
 export default {
   components: {
-    MsMd,
-    UniMd,
+    HcMd,
+    JsMd,
+    VueMd,
+    HttpMd,
+    DebugMd
   },
   name: 'New',
   data() {
     return {
-      navs: ['前端面试笔记','vue笔记','uniapp笔记','Debug'],
+      navs: ['note-html&css','note-js','note-vue','note-http','note-debug'],
       currentIndex: 0
     }
   },

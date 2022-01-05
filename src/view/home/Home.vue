@@ -30,9 +30,11 @@
         </el-col>
         <el-col :span="10">
           <div class="right">
-            <div class="theme-switch" title="切换主题">
-              <div class="iconfont" :class="iconTheme[currentIndex]" @click="themeSwitch"></div>
-            </div>
+            <a href="#">
+              <div class="theme-switch" title="切换主题">
+                <div class="iconfont" :class="iconTheme[currentIndex]" @click="themeSwitch"></div>
+              </div>
+            </a>
             <div class="rt-inner" >
               <div class="title"
               v-motion
@@ -110,6 +112,9 @@
             </div>
           </div>
         </el-col>
+    </el-row>
+    <el-row class="test" type="flex" justify="center">
+      <a href="https://beian.miit.gov.cn">渝ICP备2021014711号-1</a>
     </el-row>
   </div>
 </template>
@@ -222,7 +227,7 @@ export default {
   overflow: hidden;
 }
 .el-row {
-  height: 83vh;
+  height: 80vh;
   margin-top: 8vh;
 }
 .el-row .el-col {
